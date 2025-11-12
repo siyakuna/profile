@@ -5,7 +5,7 @@
   <title>辞書</title>
   <style>
     body {
-     background-color: rgb(255, 255, 243);
+     background-color: rgb(242 242 231);
       writing-mode: vertical-rl;
       color: #484848;
     }
@@ -38,12 +38,51 @@
       padding: 2px;
       border-radius: 5px;
     }
+    #list{
+      border: #bda27e solid 1px;
+      background-color: rgb(255, 255, 243);
+      margin: 0;
+      z-index: 2;
+      position: relative;
+    }
+  input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    z-index: 1;
+    position: relative;
+    padding: 6px 5px;
+    border: 1px solid #bda27e;
+    background: #f8f3e8;
+    color: #5c4930;
+    font-family: "Times New Roman", serif;
+    cursor: pointer;
+    border-radius: 0px 6px 6px 0px;
+    transition: 0.4s;
+  }
+
+  input[type="radio"]:checked + label {
+    z-index:3;
+    background: rgb(255, 255, 243);
+    border-left: rgb(255, 255, 243) 1px;
+    font-weight: bold;
+  }
   </style>
+  <style id="display-style">.scenario-list{display: block;}</style>
 </head>
 <body>
-  <h1>辞書</h1>
+  <div></div>
+  <h1>シナリオ辞典</h1>
+  <div id="menu-area">
+    <input type="radio" name="list-dsp" id="list-dsp-all" checked>
+    <label for="list-dsp-all">全て</label>
+    <input type="radio" name="list-dsp" id="list-dsp-tuukazumi">
+    <label for="list-dsp-tuukazumi">通過済み</label>
+    <input type="radio" name="list-dsp" id="list-dsp-mituuka">
+    <label for="list-dsp-mituuka">未通過</label>
+  </div>
   <ul id="list"><li>読み込み中...</li></ul>
   <script src="script.js"></script>
-
 </body>
 </html>
