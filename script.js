@@ -1,3 +1,4 @@
+console.log("ver1")
 const apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/17ZkGuV9VnVCTv6GrLJOfNOn3c5Ia62rQLc3F6D7H3F4/values/scenario?key=AIzaSyD60g49V7F_HJ3RVb0GoL9RW_WpqOJxvKE'; // ← ここを自分のスプレッドシートに変更
 let scenarioData = []
     fetch(apiUrl)
@@ -44,17 +45,19 @@ let scenarioData = []
         return {type:"D",int:diffDays,txt:`後${diffDays}日`};
     }
 
-      window.onload = function() {//読み込まれてからの処理
-        // 実行したい処理
-        const data = scenarioData
+    function waitForScenarioData() {//読み込まれてからの本処理待機
+  // scenarioData が配列で中身もあるか確認
+  if (Array.isArray(scenarioData) && scenarioData.length > 0) {
+    console.log('✅ scenarioData 読み込み完了:', scenarioData);
+    const data = scenarioData
         data.sort((a, b) => {//ソート
           const titleA = (a[1] ?? '').trim().normalize();
           const titleB = (b[1] ?? '').trim().normalize();
           return titleA.localeCompare(titleB, 'ja', { sensitivity: 'base' });
         });
+        console.log('scenarioData:', scenarioData);
         data.forEach(d => console.log(d[1]));
         data.forEach((row, index) => {　
-
             const li = document.createElement('li');
             li.classList.add(row[3])
             li.classList.add("scenario-list")
@@ -72,6 +75,15 @@ let scenarioData = []
             list.appendChild(li);
         })
         console.log("読み込み終了")
+      } else {
+    // データがまだなら、再試行
+    console.log('⏳ scenarioData 読み込み待機中...');
+    setTimeout(waitForScenarioData, 300); // 0.3秒後に再チェック
+  }
+}
+      window.onload = function() {//読み込まれてからの処理
+        // 実行したい処理
+        waitForScenarioData()
      }
 //メニューの表示非表示
  const radios = document.querySelectorAll('input[name="list-dsp"]');
