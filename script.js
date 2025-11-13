@@ -1,4 +1,4 @@
-console.log("ver1")
+console.log("ver1.1")
 const apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/17ZkGuV9VnVCTv6GrLJOfNOn3c5Ia62rQLc3F6D7H3F4/values/scenario?key=AIzaSyD60g49V7F_HJ3RVb0GoL9RW_WpqOJxvKE'; // ← ここを自分のスプレッドシートに変更
 let scenarioData = []
     fetch(apiUrl)
@@ -55,8 +55,6 @@ let scenarioData = []
           const titleB = (b[1] ?? '').trim().normalize();
           return titleA.localeCompare(titleB, 'ja', { sensitivity: 'base' });
         });
-        console.log('scenarioData:', scenarioData);
-        data.forEach(d => console.log(d[1]));
         data.forEach((row, index) => {　
             const li = document.createElement('li');
             li.classList.add(row[3])
@@ -75,6 +73,11 @@ let scenarioData = []
             list.appendChild(li);
         })
         console.log("読み込み終了")
+        document.getElementById('loadimg').style.opacity=0
+        document.getElementById('loadimg').style.animation="loadanime infinite 0.2s steps(1),load-fade-out 2s"
+        setTimeout(() => {
+          document.getElementById('main').style.display="block"
+        }, 2000);
       } else {
     // データがまだなら、再試行
     console.log('⏳ scenarioData 読み込み待機中...');
