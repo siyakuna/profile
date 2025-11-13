@@ -74,7 +74,7 @@ let scenarioData = []
         })
         console.log("読み込み終了")
         document.getElementById('loadimg').style.opacity=0
-        document.getElementById('loadimg').style.animation="loadanime infinite 0.2s steps(1),load-fade-out 2s"
+        document.getElementById('loadimg').style.animation="loadanime infinite 0.2s steps(1),load-fade-out 2.8s"
         setTimeout(() => {
           document.getElementById('main').style.display="block"
         }, 2000);
