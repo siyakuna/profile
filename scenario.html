@@ -73,7 +73,22 @@
     width: 240px;
     height: 290px;
     background-size: cover;
-    animation: loadanime infinite 0.2s steps(1);
+    top: 35%;
+    position: absolute;
+    left: 50%;
+    margin-left: -120px;
+    animation: loadanime infinite 0.2s steps(1),load-fade-in 1s;
+  }
+  @keyframes load-fade-in{
+    0%{
+      opacity: 0;
+    }
+    10%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
   }
   @keyframes loadanime{
   0% {
@@ -83,11 +98,26 @@
     background-position-x: right;
   }
   }
+  #main{
+    display: none;
+  }
+  @keyframes load-fade-out{
+    50%{opacity: 1;}
+    100%{opacity: 0;}
+  }
+  #main{
+    animation: main-fade-in 0.5s;
+  }
+  @keyframes main-fade-in{
+    0%{opacity: 0;}
+    100%{opacity:  1;}
+  }
   </style>
   <style id="display-style">.scenario-list{display: block;}</style>
 </head>
 <body>
-  <div></div>
+  <div id="loadimg"></div>
+  <div id="main">
   <h1>シナリオ辞典</h1>
   <div id="menu-area">
     <input type="radio" name="list-dsp" id="list-dsp-all" checked>
@@ -97,7 +127,8 @@
     <input type="radio" name="list-dsp" id="list-dsp-mituuka">
     <label for="list-dsp-mituuka">未通過</label>
   </div>
-  <ul id="list"><li><div id="loadimg"></div></li></ul>
+  <ul id="list"><li>エラーメッセージだよ。シヤクナに対処してもらって</div></li></ul>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
