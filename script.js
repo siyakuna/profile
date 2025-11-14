@@ -1,4 +1,4 @@
-console.log("ver1.1")
+console.log("ver1.2")
 const apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/17ZkGuV9VnVCTv6GrLJOfNOn3c5Ia62rQLc3F6D7H3F4/values/scenario?key=AIzaSyD60g49V7F_HJ3RVb0GoL9RW_WpqOJxvKE'; // ← ここを自分のスプレッドシートに変更
 let scenarioData = []
     fetch(apiUrl)
@@ -67,6 +67,7 @@ let scenarioData = []
               if(row[3]==="通過済み")status = "<span class='sumi'>済</span>"
               if(row[3]==="通過予定")status = "<span class='yotei'>予</span>"
               if(row[4])day = anniversaryStatus(row[4]).txt
+              if(row[3]==="非表示")li.style.display = "none"
             }
             li.innerHTML = `<strong class="title">${row[1]}</strong><span class="rub">【${row[0]}】</span>${hoText}<span class="status">${status}</span><span class="info">${row[2]}</span><span class="day">${day}</span>
             `;
